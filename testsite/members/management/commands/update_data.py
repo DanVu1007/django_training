@@ -17,7 +17,8 @@ class Command(BaseCommand):
     help = 'A brief description of your custom command'
 
     def printAllTable(self, alltable):
-        print(any)
+        for table in alltable:
+            print(**table)
 
     def handle(self, *args, **options):
         try:    
@@ -27,45 +28,20 @@ class Command(BaseCommand):
             load_dotenv()
             all_table = {
                 os.getenv("CUSTOMER_TABLE_NAME"): {
-                    'server' : {
-                        'first_name',
-                        'last_name',
-                        'email'
-                    },
-                    'dbInUser' : {
-                        'first_name',
-                        'last_name',
-                        'email'
-                    }
+                    'server' : { 'first_name', 'last_name', 'email' },
+                    'dbInUser' : { 'first_name', 'last_name', 'email' }
                 },
                 os.getenv("CATEGORY_TABLE_NAME"): {
-                    'server' : {
-                        'name',
-                        'slug',
-                        'image_url'
-                    },
-                    'dbInUser' : {
-                        'title',
-                        'slug',
-                        'image_url'
-                    }
+                    'server' : { 'name', 'slug', 'image_url' },
+                    'dbInUser' : { 'title', 'slug', 'image_url' }
                 },
                 os.getenv("PRODUCT_TABLE_NAME"): {
-                    'server' : {
-                        'name',
-                        'slug', 
-                        'description_short', 
-                        'retail_price'
-                    },
-                    'dbInUser' : {
-                        'name',
-                        'slug',
-                        'price',
-                        'description'
-                    }
+                    'server' : { 'name', 'slug',  'description_short',  'retail_price' },
+                    'dbInUser' : { 'name', 'slug', 'price', 'description' }
                 }
             }
             self.printAllTable(all_table)
+            return True
             db_host = os.getenv("DB_HOST")
             db_port = os.getenv("DB_PORT")
             db_name = os.getenv("DB_NAME")
@@ -100,9 +76,9 @@ class Command(BaseCommand):
 
             print(product_data)
 
-            # products_to_save = [Product(**data) for data in product_data]
-            # # Use bulk_create to insert the data into the database
-            # Product.objects.bulk_create(products_to_save)
+            products_to_save = [Product(**data) for data in product_data]
+            # Use bulk_create to insert the data into the database
+            Product.objects.bulk_create(products_to_save)
 
             print("Successful.")
 

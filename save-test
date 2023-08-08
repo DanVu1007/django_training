@@ -1,0 +1,44 @@
+at = {
+    'customer': {
+        'server' : {
+            'first_name',
+            'last_name',
+            'email'
+        },
+        'dbInUser' : {
+            'first_name',
+            'last_name',
+            'email'
+        }
+    },
+    'category': {
+        'server' : {
+            'name',
+            'slug',
+            'image_url'
+        },
+        'dbInUser' : {
+            'title',
+            'slug',
+            'image_url'
+        }
+    },
+}
+
+for i in at:
+    print(i)
+    query = "SELECT {} FROM {} LIMIT 5"
+    product_data = []
+    print(at[i])
+    selectColumn = result_string = ','.join(at[i]['server'])
+    query = query.format(selectColumn, i)
+    print(query)
+    cursor.execute(query)
+    data_list = cursor.fetchall()
+    for row in data_list:
+        product = {}
+        for i in at[i]['dbInUser']:
+            index = 0
+            product.append(i: row[index])
+            index = index + 1
+        product_data.append(product)
