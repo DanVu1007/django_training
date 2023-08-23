@@ -82,6 +82,6 @@ Sau khi cấu hình xong, chuyển về thư mục chứa file manage.py:
 cd ~/django-apps/testsite/
 ```
 Sau đó chạy lệnh dưới đây, trong đó thay your-server-ip thành địa chỉ IP tương ứng của server:
-```bash
-python manage.py runserver your-server-ip:8000
+```
+python3 manage.py runserver your-server-ip:8000
 ```
