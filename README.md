@@ -1,29 +1,29 @@
 # Bước 1 – Cài đặt Django
 
 ### Tạo thư mục django-apps (hoặc bất kỳ tên nào khác) để chứa ứng dụng Django
-```bash
+```
 mkdir django-apps
 ```
-```bash
+```
 cd django-apps
 ```
 ### Ở trong thư mục django-apps, tạo môi trường ảo có tên env
-```bash
+```
 composer clear-all
 ```
 ### Sau đó activate môi trường này:
-```bash
+```
 . env/bin/activate
 ```
 *Khi đã được activate thành công thì prompt sẽ có phần (env) ở phía trước:*
 `(env) danva@aht.local@CAS-065`
 
 ### Bên trong môi trường này, ta sẽ cài đặt Django bằng pip:
-```bash
+```
 pip install django
 ```
 ### Sau đó kiểm tra xem Django đã được cài đặt thành công chưa:
-```bash
+```
 django-admin --version
 ```
 `kết quả vậy là thành công`
@@ -34,7 +34,7 @@ django-admin --version
 # Bước 2 – Thay đổi cấu hình tường lửa
 
 ### Đối với tường lửa UFW, ta có thể chạy lệnh dưới đây để mở một port:
-```bash
+```
 sudo ufw allow 8000
 ```
 
@@ -44,7 +44,7 @@ sudo ufw allow 8000
 Bây giờ ta có thể khởi tạo một ứng dụng bằng django-admin – một công cụ command line cho các tác vụ quản trị trong Python. Sau đó dùng lệnh `startproject` để tạo một cấu trúc thư mục project cho website.
 Chạy lệnh sau trong thư mục `django-apps`:
 cd to `django-apps`
-```bash
+```
 django-admin startproject testsite
 ```
 Lưu ý: Khi chạy lệnh django-admin startproject <projectname>, cả thư mục project và package project đều sẽ có tên là <projectname>. Ngoài ra lệnh cũng tạo một project trong thư mục mà lệnh được chạy. Nếu có tham số <destination> trong lệnh thì Django sẽ sử dụng thư mục đích được chỉ định làm thư mục project, đồng thời tạo manage.py và package project bên trong đó.
@@ -57,7 +57,7 @@ Trong đó:
     Người dùng có thể thay đổi file asgi.py hoặc wsgi.py để phù hợp với nhu cầu deploy của mình.
 
 ### Tạo một module
-```bash
+```
 python3 manage.py startapp polls
 ```
 
@@ -72,13 +72,13 @@ ALLOWED_HOSTS = ['your-server-ip']
 ...`
 
 ### Thêm địa chỉ IP vào danh sách ALLOWED_HOSTS
-```bash
+```
 python3 manage.py createsuperuser
 ```
 # Bước 5 – Truy cập ứng dụng web Django
 
 Sau khi cấu hình xong, chuyển về thư mục chứa file manage.py:
-```bash
+```
 cd ~/django-apps/testsite/
 ```
 Sau đó chạy lệnh dưới đây, trong đó thay your-server-ip thành địa chỉ IP tương ứng của server:
