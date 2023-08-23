@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'members',
     'categories',
     'products',
+    'megamenu',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Catalog</title>
+</head>
+<body>
+    <h1>Catalog</h1>
+    <ul>
+        {% for item in data %}
+            <li>{{ item.email }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
