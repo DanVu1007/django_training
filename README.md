@@ -1,3 +1,4 @@
+README ấn ctr+shift+v sẽ ra preview của README
 # Bước 1 – Cài đặt Django
 
 ### Tạo thư mục django-apps (hoặc bất kỳ tên nào khác) để chứa ứng dụng Django
@@ -14,6 +15,10 @@ composer clear-all
 ### Sau đó activate môi trường này:
 ```
 . env/bin/activate
+```
+### tắt activate môi trường:
+```
+deactivate
 ```
 *Khi đã được activate thành công thì prompt sẽ có phần (env) ở phía trước:*
 `(env) danva@aht.local@CAS-065`
