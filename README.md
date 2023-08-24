@@ -90,3 +90,106 @@ Sau đó chạy lệnh dưới đây, trong đó thay your-server-ip thành đ�
 ```
 python3 manage.py runserver your-server-ip:8000
 ```
+
+
+# Các lưu ý:
+
+#### Url view
+Trong `urls.py của app` thêm nội dung:
+```
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('megamenu/', include('megamenu.urls')),
+    path('', include('home.urls')),  # Khai báo thêm về urls của module home
+]
+```
+Trong `urls.py` của `module home` thêm nội dung:
+```
+from django.urls import path
+from . import views
+
+urlpatterns = [
+   path('', views.index)
+]
+
+```
+Trong `views.py` của `module home` thêm nội dung:
+```
+from django.shortcuts import render
+# Create your views here.
+def index(request):
+    context = {
+        'year': 2023,
+    }
+    return render(request, 'pages/home.html', context)
+```
+
+Trong đó lưu ý `template/pages/home.html` sẽ được kế thừa từ `template/pages/base.html`
+```
+home
+    |__templates
+                |__base.html
+                |__home.html
+    |__urls.py
+    |__views.py
+```
+
+#### Static
+Thêm nội dung sau vào file `settings.py`
+Đầu tiên import os
+```
+import os
+```
+Sau đó khai báo STATICFILES_DIRS
+```
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, "static"),
+]
+```
+Tải các file cần import nhự `css` hay `js` vào folder `static`
+
+Sau đó thêm đoạn code sau trong thẻ `<head>`
+```
+{% load staticfiles %}
+```
+Sử dụng css
+```
+<link rel="stylesheet" href = " {% static 'css/bootstrap.min.css' %}" type="text/css">
+```
+Sử dụng js
+```
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+```
+Có thể kiểm tra được rồi
+
+#### Media
+Kiểm tra và thêm phần Cấu hình Media trong `settings.py`
+```
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+```
+
+Trong thư mục gốc `app/urls.py` sửa nội dung urls.py :
+Thêm dòng sau để phục vụ các tệp media trong môi trường phát triển
+```
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
+
+#### Admin module
+Muốn hiển thị nội dung quản lý trong admin django đăng kí nội dung sau trong module:  `megamenu/admin.py`
+```
+from django.contrib import admin
+
+# Register your models here.
+from .models import MegaMenu, MenuItem
+
+class MegaMenuAdmin(admin.ModelAdmin):
+    list_display = ('name', 'use_on_fe', 'banner')  # Các field cần hiển thị
+
+class MenuItemAdmin(admin.ModelAdmin):
+    list_display = ('name', 'link', 'categories', 'content', 'show_categories', 'level_category', 'sequence') # Các field cần hiển thị
+
+admin.site.register(MegaMenu, MegaMenuAdmin) # Đăng kí để hiển thị quản trị
+admin.site.register(MenuItem, MenuItemAdmin) # Đăng kí để hiển thị quản trị
+```

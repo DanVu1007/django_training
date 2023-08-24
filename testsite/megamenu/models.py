@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class MegaMenu(models.Model):
+    name = models.CharField(max_length=255,default='mega', null=False)
     use_on_fe = models.BooleanField(default=False)
     banner = models.ImageField(upload_to='megamenu_images/', blank=True, null=True)
 
@@ -19,7 +20,7 @@ class MegaMenu(models.Model):
         super(MegaMenu, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        return "%s - (%s)" % (self.name, self.pk)
 
 class MenuItem(models.Model):
     name = models.CharField(max_length=255)
