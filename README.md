@@ -249,4 +249,4 @@ class Membership(models.Model):
 
 ## Phần 2
 #### Metadata (siêu dữ liệu)
-Các siêu dữ liệu sẽ được lưu trong một lớp nội có tên là Meta. Lớp này lưu trữ các thông tin cấu hình model, chẳng hạn như ordering tức là sắp xếp dữ liệu được trả về mặc định theo cột nào, db_table là tên bảng được tạo trong CSDL… [Document](https://docs.djangoproject.com/en/4.2/topics/db/models/)
+Các siêu dữ liệu sẽ được lưu trong một lớp nội có tên là Meta. Lớp này lưu trữ các thông tin cấu hình model, chẳng hạn như ordering tức là sắp xếp dữ liệu được trả về mặc định theo cột nào, db_table là tên bảng được tạo trong CSDL… [Document](https://docs.djangoproject.com/en/4.2/ref/models/options/)

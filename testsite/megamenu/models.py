@@ -22,6 +22,8 @@ class MegaMenu(models.Model):
     def __str__(self):
         return "%s - (%s)" % (self.name, self.pk)
 
+    megaitems = models.ManyToManyField('MenuItem')
+
 class MenuItem(models.Model):
     name = models.CharField(max_length=255)
     link = models.CharField(max_length=255)
