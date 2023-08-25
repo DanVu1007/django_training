@@ -193,3 +193,60 @@ class MenuItemAdmin(admin.ModelAdmin):
 admin.site.register(MegaMenu, MegaMenuAdmin) # Đăng kí để hiển thị quản trị
 admin.site.register(MenuItem, MenuItemAdmin) # Đăng kí để hiển thị quản trị
 ```
+
+
+# Các lưu ý về models
+## Phần 1
+### Fields
+#### Các fields
+#### Tham số trong fields
+
+### Quan hệ (Relationship)
+#### many-to-one
+```
+from django.db import models
+ 
+class Manufacturer(models.Models):
+    #...
+    pass
+ 
+class Car(models.Model):
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    #...
+```
+#### many-to-many 
+```
+from django.db import models
+ 
+class Topping(models.Model):
+    #...
+    pass
+ 
+class Pizza(models.Model):
+    #...
+    toppings = models.ManyToManyField(Topping)
+```
+
+Thuộc tính của một mối quan hệ many-to-many
+```
+from django.db import models
+ 
+class Person(models.Model):
+    name = models.CharField(max_length=128)
+ 
+class Group(models.Model):
+    name = models.CharField(max_length=128)
+    members = models.ManyToManyField(Person, through='Membership')
+ 
+class Membership(models.Model):
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    date_joined = models.DateField()
+    invite_reason = models.CharField(max_length=64)
+```
+#### one-to-one
+
+
+## Phần 2
+#### Metadata (siêu dữ liệu)
+Các siêu dữ liệu sẽ được lưu trong một lớp nội có tên là Meta. Lớp này lưu trữ các thông tin cấu hình model, chẳng hạn như ordering tức là sắp xếp dữ liệu được trả về mặc định theo cột nào, db_table là tên bảng được tạo trong CSDL… [Document](https://docs.djangoproject.com/en/4.2/topics/db/models/)
