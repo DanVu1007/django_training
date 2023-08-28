@@ -10,7 +10,7 @@ cd django-apps
 ```
 ### Ở trong thư mục django-apps, tạo môi trường ảo có tên env
 ```
-composer clear-all
+virtualenv env
 ```
 ### Sau đó activate môi trường này:
 ```
@@ -75,6 +75,11 @@ Sửa nội dung:
 `Edit the line below with your server IP address
 ALLOWED_HOSTS = ['your-server-ip']
 ...`
+
+### Migrate data
+```
+python3 manage.py migrate
+```
 
 ### Thêm địa chỉ IP vào danh sách ALLOWED_HOSTS
 ```
