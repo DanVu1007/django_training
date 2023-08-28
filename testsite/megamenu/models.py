@@ -20,7 +20,7 @@ class MegaMenu(models.Model):
         super(MegaMenu, self).save(*args, **kwargs)
 
     def __str__(self):
-        return "%s - (%s)" % (self.name, self.pk)
+        return "(%s) - %s" % (self.pk, self.name)
 
     megaitems = models.ManyToManyField('MenuItem')
 
@@ -34,3 +34,6 @@ class MenuItem(models.Model):
     sequence = models.IntegerField(default=1)
     
     megamenus = models.ManyToManyField(MegaMenu)
+    
+    def __str__(self):
+        return "(%s) - %s" % (self.pk, self.name)
